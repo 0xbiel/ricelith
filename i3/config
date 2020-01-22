@@ -50,7 +50,7 @@ hide_edge_borders smart
 bindsym $mod+Return exec $terminal_path
 
 # start a web browser
-bindsym $mod+Shift+Return exec /usr/bin/sensible-browser
+# bindsym $mod+Shift+Return exec /usr/bin/sensible-browser
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -59,6 +59,9 @@ set_from_resource $rofiTheme rofi.theme "regolith-theme"
 
 # rofi app and window launchers
 bindsym $mod+d exec rofi -show drun
+
+bindsym $mod+Shift+Return exec ~/rofimoji/src/picker/rofimoji.py
+
 
 # change focus
 bindsym $mod+Left focus left
