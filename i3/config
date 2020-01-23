@@ -303,10 +303,9 @@ set_from_resource $i3-wm.bar.font i3-wm.bar.font "pango:Source Code Pro Medium 1
 
 # Configure the bar
 bar {
-  font $i3-wm.bar.font
+  font xft:URWGothic-Book 11
   separator_symbol " "
-  status_command i3xrocks -c $i3xrocks_config
-  tray_output none
+  status_command i3status #first, install i3status: sudo apt install i3status
   strip_workspace_numbers yes
 
   colors {
