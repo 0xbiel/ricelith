@@ -44,7 +44,7 @@ set_from_resource $ws19 i3-wm.workspace.19.name "19"
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-hide_edge_borders smart
+for_window [class="^.*"] border pixel 0
 
 # start a terminal
 bindsym $mod+Return exec $terminal_path
@@ -195,7 +195,7 @@ bindsym $mod+Escape exec gnome-screensaver-command --lock
 # put the system to sleep
 bindsym $mod+Shift+s exec systemctl suspend
 
-for_window [title="urxvt"] floating enable, resize set 700px 700px, move position center
+#for_window [title="urxvt"] floating enable, resize set 700px 700px, move position center
 
 # shortcuts for common system configuration tasks
 bindsym $mod+c exec gnome-control-center
@@ -250,22 +250,22 @@ gaps outer 0
 set_from_resource $focused.color.background i3-wm.client.focused.color.background "#586e75"
 set_from_resource $focused.color.text i3-wm.client.focused.color.text "#fdf6e3"
 set_from_resource $focused.color.indicator i3-wm.client.focused.color.indicator "#268bd2"
-set_from_resource $focused.color.child_border i3-wm.client.focused.color.child_border
+# set_from_resource $focused.color.child_border i3-wm.client.focused.color.child_border
 
 set_from_resource $focused_inactive.color.background i3-wm.client.focused_inactive.color.background "#073642"
 set_from_resource $focused_inactive.color.text i3-wm.client.focused_inactive.color.text "#839496"
 set_from_resource $focused_inactive.color.indicator i3-wm.client.focused_inactive.color.indicator "#073642"
-set_from_resource $focused_inactive.color.child_border i3-wm.client.focused_inactive.color.child_border 
+# set_from_resource $focused_inactive.color.child_border i3-wm.client.focused_inactive.color.child_border 
 
 set_from_resource $unfocused.color.background i3-wm.client.unfocused.color.background "#073642"
 set_from_resource $unfocused.color.text i3-wm.client.unfocused.color.text "#839496"
 set_from_resource $unfocused.color.indicator i3-wm.client.unfocused.color.indicator "#073642"
-set_from_resource $unfocused.color.child_border i3-wm.client.unfocused.color.child_border
+# set_from_resource $unfocused.color.child_border i3-wm.client.unfocused.color.child_border
 
 set_from_resource $urgent.color.background i3-wm.client.urgent.color.background "#dc322f"
 set_from_resource $urgent.color.text i3-wm.client.urgent.color.text "#fdf6e3"
 set_from_resource $urgent.color.indicator i3-wm.client.urgent.color.indicator "#002b36"
-set_from_resource $urgent.color.child_border i3-wm.client.urgent.color.child_border
+# set_from_resource $urgent.color.child_border i3-wm.client.urgent.color.child_border
 
 
 # Window Border color
@@ -310,6 +310,7 @@ bar {
   status_command i3status #first, install i3status: sudo apt install i3status
   strip_workspace_numbers yes
 
+  position top
   colors {
       background $i3-wm.bar.background.color
       statusline $i3-wm.bar.statusline.color
@@ -325,6 +326,8 @@ bar {
 
 # Run programs when i3 starts
 
+# exec --no-startup-id wal -i ~/Pictures/h.jpg
+
 # Start the composite manager
 exec --no-startup-id compton -f --config $compton_config
 
@@ -335,4 +338,5 @@ exec --no-startup-id /usr/bin/regolith-ftue
 exec --no-startup-id /usr/bin/unclutter -b
 
 # Refresh wallpaper on screen resolution change
-exec --no-startup-id /usr/bin/xeventbind resolution /usr/bin/wallpaper-refresh
+# exec --no-startup-id /usr/bin/xeventbind resolution /usr/bin/wallpaper-refresh
+
