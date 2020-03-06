@@ -44,7 +44,12 @@ set_from_resource $ws19 i3-wm.workspace.19.name "19"
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border normal
+
+
+bindsym $mod+u border none
+bindsym $mod+y border pixel 1
+bindsym $mod+n border normal
 
 # start a terminal
 bindsym $mod+Return exec $terminal_path
@@ -60,7 +65,7 @@ set_from_resource $rofiTheme rofi.theme "regolith-theme"
 # rofi app and window launchers
 bindsym $mod+d exec rofi -show drun
 
-bindsym $mod+Shift+Return exec ~/rofimoji/src/picker/rofimoji.py
+bindsym $mod+Shift+Return exec ~/rofimoji/picker/rofimoji.py
 
 
 # split orientation
@@ -202,7 +207,7 @@ bindsym $mod+c exec gnome-control-center
 bindsym $mod+w exec gnome-control-center wifi
 bindsym $mod+b exec gnome-control-center bluetooth
 #bindsym $mod+d exec gnome-control-center display
-bindsym $mod+n exec gnome-control-center network
+#bindsym $mod+n exec gnome-control-center network
 bindsym $mod+p exec gnome-control-center power
 bindsym $mod+s exec gnome-control-center sound
 
@@ -241,26 +246,26 @@ new_window pixel 1
 new_float pixel 1
 
 # Gaps (i3-gaps)
-gaps inner 15
+gaps inner 0
 gaps outer 0
 
 # Only enable gaps on a workspace when there is at least one container
-# smart_gaps on
+smart_gaps on
 
-set_from_resource $focused.color.background i3-wm.client.focused.color.background "#586e75"
-set_from_resource $focused.color.text i3-wm.client.focused.color.text "#fdf6e3"
-set_from_resource $focused.color.indicator i3-wm.client.focused.color.indicator "#268bd2"
-# set_from_resource $focused.color.child_border i3-wm.client.focused.color.child_border
+set_from_resource $focused.color.background i3-wm.client.focused.color.background "#111111"
+set_from_resource $focused.color.text i3-wm.client.focused.color.text "#FFFFFF"
+set_from_resource $focused.color.indicator i3-wm.client.focused.color.indicator "#111111"
+set_from_resource $focused.color.child_border i3-wm.client.focused.color.child_border: "#111111"
 
-set_from_resource $focused_inactive.color.background i3-wm.client.focused_inactive.color.background "#073642"
-set_from_resource $focused_inactive.color.text i3-wm.client.focused_inactive.color.text "#839496"
-set_from_resource $focused_inactive.color.indicator i3-wm.client.focused_inactive.color.indicator "#073642"
-# set_from_resource $focused_inactive.color.child_border i3-wm.client.focused_inactive.color.child_border 
+set_from_resource $focused_inactive.color.background i3-wm.client.focused_inactive.color.background "#C4C4C4"
+set_from_resource $focused_inactive.color.text i3-wm.client.focused_inactive.color.text "#111111"
+set_from_resource $focused_inactive.color.indicator i3-wm.client.focused_inactive.color.indicator "#C4C4C4"
+set_from_resource $focused_inactive.color.child_border i3-wm.client.focused_inactive.color.child_border: "C4C4C4"
 
-set_from_resource $unfocused.color.background i3-wm.client.unfocused.color.background "#073642"
-set_from_resource $unfocused.color.text i3-wm.client.unfocused.color.text "#839496"
-set_from_resource $unfocused.color.indicator i3-wm.client.unfocused.color.indicator "#073642"
-# set_from_resource $unfocused.color.child_border i3-wm.client.unfocused.color.child_border
+set_from_resource $unfocused.color.background i3-wm.client.unfocused.color.background "#555555"
+set_from_resource $unfocused.color.text i3-wm.client.unfocused.color.text "#696969"
+set_from_resource $unfocused.color.indicator i3-wm.client.unfocused.color.indicator "#C4C4C4"
+set_from_resource $unfocused.color.child_border i3-wm.client.unfocused.color.child_border: "C4C4C4"
 
 set_from_resource $urgent.color.background i3-wm.client.urgent.color.background "#dc322f"
 set_from_resource $urgent.color.text i3-wm.client.urgent.color.text "#fdf6e3"
@@ -270,7 +275,7 @@ set_from_resource $urgent.color.indicator i3-wm.client.urgent.color.indicator "#
 
 # Window Border color
 # class                 border                             background                         text                               indicator                          child_border
-client.focused          none             $focused.color.background          $focused.color.text                $focused.color.indicator           $focused.color.child_border
+client.focused          #111111            $focused.color.background          $focused.color.text                $focused.color.indicator           $focused.color.child_border
 client.focused_inactive none     $focused_inactive.color.background $focused_inactive.color.text       $focused_inactive.color.indicator  $focused_inactive.color.child_border
 client.unfocused        none            $unfocused.color.background        $unfocused.color.text              $unfocused.color.indicator         $unfocused.color.child_border
 client.urgent           none              $urgent.color.background           $urgent.color.text                 $urgent.color.indicator            $urgent.color.child_border
@@ -282,19 +287,19 @@ popup_during_fullscreen smart
 focus_follows_mouse no
 
 set_from_resource $i3-wm.bar.background.color i3-wm.bar.background.color "#000000"
-set_from_resource $i3-wm.bar.statusline.color i3-wm.bar.statusline.color "#93a1a1"
-set_from_resource $i3-wm.bar.separator.color i3-wm.bar.separator.color "#268bd2"
+set_from_resource $i3-wm.bar.statusline.color i3-wm.bar.statusline.color "#FFFFFF"
+set_from_resource $i3-wm.bar.separator.color i3-wm.bar.separator.color "#111111"
 
 set_from_resource $i3-wm.bar.workspace.focused.border.color i3-wm.bar.workspace.focused.border.color "#FFFFFF"
 set_from_resource $i3-wm.bar.workspace.focused.background.color i3-wm.bar.workspace.focused.background.color "#FFFFFF"
 set_from_resource $i3-wm.bar.workspace.focused.text.color i3-wm.bar.workspace.focused.text.color "#000000"
 
-set_from_resource $i3-wm.bar.workspace.active.border.color i3-wm.bar.workspace.active.border.color "#FFFFFF"
+set_from_resource $i3-wm.bar.workspace.active.border.color i3-wm.bar.workspace.active.border.color "#111111"
 set_from_resource $i3-wm.bar.workspace.active.background.color i3-wm.bar.workspace.active.background.color "#FFFFFF"
 set_from_resource $i3-wm.bar.workspace.active.text.color i3-wm.bar.workspace.active.text.color "#000000"
 
-set_from_resource $i3-wm.bar.workspace.inactive.border.color i3-wm.bar.workspace.inactive.border.color "#002b36"
-set_from_resource $i3-wm.bar.workspace.inactive.background.color i3-wm.bar.workspace.inactive.background.color "#002b36"
+set_from_resource $i3-wm.bar.workspace.inactive.border.color i3-wm.bar.workspace.inactive.border.color "#CCCCCC"
+set_from_resource $i3-wm.bar.workspace.inactive.background.color i3-wm.bar.workspace.inactive.background.color "#CCCCCC"
 set_from_resource $i3-wm.bar.workspace.inactive.text.color i3-wm.bar.workspace.inactive.text.color "#586e75"
 
 set_from_resource $i3-wm.bar.workspace.urgent.border.color i3-wm.bar.workspace.urgent.border.color "#dc322f"
@@ -310,7 +315,7 @@ bar {
   status_command i3status #first, install i3status: sudo apt install i3status
   strip_workspace_numbers yes
 
-  position top
+  position bottom
   colors {
       background $i3-wm.bar.background.color
       statusline $i3-wm.bar.statusline.color
