@@ -252,33 +252,14 @@ gaps outer 0
 # Only enable gaps on a workspace when there is at least one container
 smart_gaps on
 
-set_from_resource $focused.color.background i3-wm.client.focused.color.background "#111111"
-set_from_resource $focused.color.text i3-wm.client.focused.color.text "#FFFFFF"
-set_from_resource $focused.color.indicator i3-wm.client.focused.color.indicator "#111111"
-set_from_resource $focused.color.child_border i3-wm.client.focused.color.child_border: "#111111"
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
-set_from_resource $focused_inactive.color.background i3-wm.client.focused_inactive.color.background "#C4C4C4"
-set_from_resource $focused_inactive.color.text i3-wm.client.focused_inactive.color.text "#111111"
-set_from_resource $focused_inactive.color.indicator i3-wm.client.focused_inactive.color.indicator "#C4C4C4"
-set_from_resource $focused_inactive.color.child_border i3-wm.client.focused_inactive.color.child_border: "C4C4C4"
+client.background       #ffffff
 
-set_from_resource $unfocused.color.background i3-wm.client.unfocused.color.background "#555555"
-set_from_resource $unfocused.color.text i3-wm.client.unfocused.color.text "#696969"
-set_from_resource $unfocused.color.indicator i3-wm.client.unfocused.color.indicator "#C4C4C4"
-set_from_resource $unfocused.color.child_border i3-wm.client.unfocused.color.child_border: "C4C4C4"
-
-set_from_resource $urgent.color.background i3-wm.client.urgent.color.background "#dc322f"
-set_from_resource $urgent.color.text i3-wm.client.urgent.color.text "#fdf6e3"
-set_from_resource $urgent.color.indicator i3-wm.client.urgent.color.indicator "#002b36"
-# set_from_resource $urgent.color.child_border i3-wm.client.urgent.color.child_border
-
-
-# Window Border color
-# class                 border                             background                         text                               indicator                          child_border
-client.focused          #111111            $focused.color.background          $focused.color.text                $focused.color.indicator           $focused.color.child_border
-client.focused_inactive none     $focused_inactive.color.background $focused_inactive.color.text       $focused_inactive.color.indicator  $focused_inactive.color.child_border
-client.unfocused        none            $unfocused.color.background        $unfocused.color.text              $unfocused.color.indicator         $unfocused.color.child_border
-client.urgent           none              $urgent.color.background           $urgent.color.text                 $urgent.color.indicator            $urgent.color.child_border
 
 # Enable popup during fullscreen
 popup_during_fullscreen smart
