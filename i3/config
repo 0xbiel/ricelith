@@ -1,23 +1,17 @@
-# OG Location: /etc/regolith/i3
-
-
-# i3 config file (v4) for Regolith Desktop Environment
+# i3 config file for the Regolith Desktop Environment
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-# This defines which key super maps to on your keyboard.  
+# This defines which key super maps to on your keyboard.
 # Alt key is Mod1, and Windows key is Mod4
 set $mod Mod4
 set $alt Mod1
 
-# i3xrocks config file
+# i3xrocks config file. Override this for custom status indicators on the bar.
 set $i3xrocks_config /etc/regolith/i3xrocks/config
 
-# compton config file
-set $compton_config /etc/regolith/compton/conf
-
 # path to terminal. Override this to specify a custom terminal.
-set $terminal_path /usr/bin/urxvt
+set $terminal_path /usr/bin/st
 
 # Color values are defined in ~/.Xresources-regolith
 # These are the labels which define each i3 workspace.
@@ -44,18 +38,15 @@ set_from_resource $ws19 i3-wm.workspace.19.name "19"
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-for_window [class="^.*"] border normal
+hide_edge_borders smart
 
-
-bindsym $mod+u border none
-bindsym $mod+y border pixel 1
-bindsym $mod+n border normal
+exec_always --no-startup-id /home/gabriel/autotiling.py
 
 # start a terminal
 bindsym $mod+Return exec $terminal_path
 
 # start a web browser
-# bindsym $mod+Shift+Return exec /usr/bin/sensible-browser
+#bindsym $mod+Shift+Return exec /usr/bin/sensible-browser
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -63,21 +54,20 @@ bindsym $mod+Shift+q kill
 set_from_resource $rofiTheme rofi.theme "regolith-theme"
 
 # rofi app and window launchers
-bindsym $mod+d exec rofi -show drun
+bindsym $mod+d exec dmenu_run
 
-bindsym $mod+Shift+Return exec ~/rofimoji/picker/rofimoji.py
-
-
-# split orientation
-bindsym $mod+h split h;exec notify-send 'tile horizontally'
-bindsym $mod+v split v;exec notify-send 'tile vertically'
-bindsym $mod+q split toggle
+bindsym $mod+Shift+Return exec /home/gabriel/dmenu-emoji/dmenu-emoji.sh
 
 # change focus
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # move windows in workspaces
 bindsym $mod+Shift+Left move left
@@ -90,21 +80,25 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
+# move workspaces to outputs
+bindsym $mod+Ctrl+Shift+Left move workspace to output left
+bindsym $mod+Ctrl+Shift+Down move workspace to output down
+bindsym $mod+Ctrl+Shift+Up move workspace to output up
+bindsym $mod+Ctrl+Shift+Right move workspace to output right
+
 # toggle split orientation
 bindsym $mod+BackSpace split toggle
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change gaps interactively
-bindsym $mod+minus gaps inner current minus 6
-bindsym $mod+plus gaps inner current plus 6
-
 # show/hide keybindings
-bindsym $mod+Shift+question exec --no-startup-id /usr/bin/conky-toggle
+bindsym $mod+Shift+question exec --no-startup-id /usr/bin/remontoire-toggle
 
 # toggle tiling / floating
 bindsym $mod+Shift+f floating toggle
+bindsym $mod+Ctrl+m move to scratchpad
+bindsym $mod+Ctrl+a scratchpad show
 
 # change focus between tiling / floating windows
 bindsym $mod+Shift+t focus mode_toggle
@@ -112,72 +106,72 @@ bindsym $mod+Shift+t focus mode_toggle
 # toggle tabbed mode
 bindsym $mod+t layout toggle tabbed splith splitv
 
-# move to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
-bindsym $mod+Ctrl+1 workspace $ws11
-bindsym $mod+Ctrl+2 workspace $ws12
-bindsym $mod+Ctrl+3 workspace $ws13
-bindsym $mod+Ctrl+4 workspace $ws14
-bindsym $mod+Ctrl+5 workspace $ws15
-bindsym $mod+Ctrl+6 workspace $ws16
-bindsym $mod+Ctrl+7 workspace $ws17
-bindsym $mod+Ctrl+8 workspace $ws18
-bindsym $mod+Ctrl+9 workspace $ws19
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+bindsym $mod+Ctrl+1 workspace number $ws11
+bindsym $mod+Ctrl+2 workspace number $ws12
+bindsym $mod+Ctrl+3 workspace number $ws13
+bindsym $mod+Ctrl+4 workspace number $ws14
+bindsym $mod+Ctrl+5 workspace number $ws15
+bindsym $mod+Ctrl+6 workspace number $ws16
+bindsym $mod+Ctrl+7 workspace number $ws17
+bindsym $mod+Ctrl+8 workspace number $ws18
+bindsym $mod+Ctrl+9 workspace number $ws19
 
 # cycle across workspaces
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
-bindsym $mod+Shift+Ctrl+1 move container to workspace $ws11
-bindsym $mod+Shift+Ctrl+2 move container to workspace $ws12
-bindsym $mod+Shift+Ctrl+3 move container to workspace $ws13
-bindsym $mod+Shift+Ctrl+4 move container to workspace $ws14
-bindsym $mod+Shift+Ctrl+5 move container to workspace $ws15
-bindsym $mod+Shift+Ctrl+6 move container to workspace $ws16
-bindsym $mod+Shift+Ctrl+7 move container to workspace $ws17
-bindsym $mod+Shift+Ctrl+8 move container to workspace $ws18
-bindsym $mod+Shift+Ctrl+9 move container to workspace $ws19
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+Ctrl+1 move container to workspace number $ws11
+bindsym $mod+Shift+Ctrl+2 move container to workspace number $ws12
+bindsym $mod+Shift+Ctrl+3 move container to workspace number $ws13
+bindsym $mod+Shift+Ctrl+4 move container to workspace number $ws14
+bindsym $mod+Shift+Ctrl+5 move container to workspace number $ws15
+bindsym $mod+Shift+Ctrl+6 move container to workspace number $ws16
+bindsym $mod+Shift+Ctrl+7 move container to workspace number $ws17
+bindsym $mod+Shift+Ctrl+8 move container to workspace number $ws18
+bindsym $mod+Shift+Ctrl+9 move container to workspace number $ws19
 
 # move focused container to workspace, move to workspace
-bindsym $mod+$alt+1 move container to workspace $ws1; workspace $ws1  
-bindsym $mod+$alt+2 move container to workspace $ws2; workspace $ws2
-bindsym $mod+$alt+3 move container to workspace $ws3; workspace $ws3
-bindsym $mod+$alt+4 move container to workspace $ws4; workspace $ws4
-bindsym $mod+$alt+5 move container to workspace $ws5; workspace $ws5
-bindsym $mod+$alt+6 move container to workspace $ws6; workspace $ws6
-bindsym $mod+$alt+7 move container to workspace $ws7; workspace $ws7
-bindsym $mod+$alt+8 move container to workspace $ws8; workspace $ws8
-bindsym $mod+$alt+9 move container to workspace $ws9; workspace $ws9
-bindsym $mod+$alt+0 move container to workspace $ws10; workspace $ws1
-bindsym $mod+$alt+Ctrl+1 move container to workspace $ws11; workspace $ws11
-bindsym $mod+$alt+Ctrl+2 move container to workspace $ws12; workspace $ws12
-bindsym $mod+$alt+Ctrl+3 move container to workspace $ws13; workspace $ws13
-bindsym $mod+$alt+Ctrl+4 move container to workspace $ws14; workspace $ws14
-bindsym $mod+$alt+Ctrl+5 move container to workspace $ws15; workspace $ws15
-bindsym $mod+$alt+Ctrl+6 move container to workspace $ws16; workspace $ws16
-bindsym $mod+$alt+Ctrl+7 move container to workspace $ws17; workspace $ws17
-bindsym $mod+$alt+Ctrl+8 move container to workspace $ws18; workspace $ws18
-bindsym $mod+$alt+Ctrl+9 move container to workspace $ws19; workspace $ws19
+bindsym $mod+$alt+1 move container to workspace number $ws1; workspace number $ws1  
+bindsym $mod+$alt+2 move container to workspace number $ws2; workspace number $ws2
+bindsym $mod+$alt+3 move container to workspace number $ws3; workspace number $ws3
+bindsym $mod+$alt+4 move container to workspace number $ws4; workspace number $ws4
+bindsym $mod+$alt+5 move container to workspace number $ws5; workspace number $ws5
+bindsym $mod+$alt+6 move container to workspace number $ws6; workspace number $ws6
+bindsym $mod+$alt+7 move container to workspace number $ws7; workspace number $ws7
+bindsym $mod+$alt+8 move container to workspace number $ws8; workspace number $ws8
+bindsym $mod+$alt+9 move container to workspace number $ws9; workspace number $ws9
+bindsym $mod+$alt+0 move container to workspace number $ws10; workspace number $ws10
+bindsym $mod+$alt+Ctrl+1 move container to workspace number $ws11; workspace number $ws11
+bindsym $mod+$alt+Ctrl+2 move container to workspace number $ws12; workspace number $ws12
+bindsym $mod+$alt+Ctrl+3 move container to workspace number $ws13; workspace number $ws13
+bindsym $mod+$alt+Ctrl+4 move container to workspace number $ws14; workspace number $ws14
+bindsym $mod+$alt+Ctrl+5 move container to workspace number $ws15; workspace number $ws15
+bindsym $mod+$alt+Ctrl+6 move container to workspace number $ws16; workspace number $ws16
+bindsym $mod+$alt+Ctrl+7 move container to workspace number $ws17; workspace number $ws17
+bindsym $mod+$alt+Ctrl+8 move container to workspace number $ws18; workspace number $ws18
+bindsym $mod+$alt+Ctrl+9 move container to workspace number $ws19; workspace number $ws19
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -200,16 +194,21 @@ bindsym $mod+Escape exec gnome-screensaver-command --lock
 # put the system to sleep
 bindsym $mod+Shift+s exec systemctl suspend
 
-#for_window [title="urxvt"] floating enable, resize set 700px 700px, move position center
-
 # shortcuts for common system configuration tasks
 bindsym $mod+c exec gnome-control-center
 bindsym $mod+w exec gnome-control-center wifi
-bindsym $mod+b exec gnome-control-center bluetooth
-#bindsym $mod+d exec gnome-control-center display
-#bindsym $mod+n exec gnome-control-center network
-bindsym $mod+p exec gnome-control-center power
-bindsym $mod+s exec gnome-control-center sound
+bindsym $mod+Shift+n exec nautilus
+
+# i3-snapshot for load/save current layout
+bindsym $mod+comma  exec /usr/bin/i3-snapshot -o > /tmp/i3-snapshot 
+bindsym $mod+period exec /usr/bin/i3-snapshot -c < /tmp/i3-snapshot
+
+# Toggle bar visibility
+bindsym $mod+i bar mode toggle
+
+# Cause Settings app to float above tiled windows
+floating_maximum_size -1 x -1
+for_window [class="Gnome-control-center"] floating enable
 
 # resize window (you can also use the mouse for that)
 mode "Resize Mode" {
@@ -234,6 +233,12 @@ mode "Resize Mode" {
         bindsym Shift+j resize shrink height 12 px or 12 ppt
         bindsym Shift+l resize grow width 12 px or 12 ppt
 
+        # change gaps interactively
+        bindsym minus gaps inner current minus 6
+        bindsym plus gaps inner current plus 6
+        bindsym Shift+minus gaps inner current minus 12
+        bindsym Shift+plus gaps inner current plus 12
+
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -242,87 +247,80 @@ mode "Resize Mode" {
 bindsym $mod+r mode "Resize Mode"
 
 # Disable titlebar
-new_window pixel 1
-new_float pixel 1
+new_window normal
+new_float normal
 
-# Gaps (i3-gaps)
+bindsym $mod+u border none
+bindsym $mod+y border pixel 1
+bindsym $mod+n border normal
+
+
+# Specify the distance between windows in pixels. (i3-gaps)
 gaps inner 0
 gaps outer 0
 
 # Only enable gaps on a workspace when there is at least one container
 smart_gaps on
 
-client.focused          #4c7899 #285577 #ffffff #4c7899   #285577
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+font xft:URWGothic-Book 8
 
-client.background       #ffffff
+# Window Border color
+# class                 border                             background                         text                               indicator                          child_border
+#client.focused          #4c7899 #285577 #ffffff #4c7899   #285577
+#client.unfocused          #000000 #000000 #888888 #000000   #000000
+#client.focused_inactive #000000 #000000 #888888 #000000   #000000
+#client.focused        #000000 #000000 #888888 #000000   #000000
+#client.urgent           #2f343a #900000 #ffffff #900000   #900000
+#client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
+#client.background       #ffffff
+
+# class                 border  backgr. text    indicator child_border
+ client.focused          #4c7899 #285577 #ffffff #285577   #285577
+ client.focused_inactive #333333 #5f676a #ffffff #5f676a   #5f676a
+ client.unfocused        #333333 #222222 #888888 #222222   #222222
+ client.urgent           #2f343a #900000 #ffffff #900000   #900000
+ client.placeholder      #000000 #0c0c0c #ffffff #0c0c0c   #0c0c0c
+
+ client.background       #ffffff
 
 # Enable popup during fullscreen
 popup_during_fullscreen smart
 
 # window focus follows your mouse movements as the mouse crosses window borders
-focus_follows_mouse no
+focus_follows_mouse yes
 
-set_from_resource $i3-wm.bar.background.color i3-wm.bar.background.color "#000000"
-set_from_resource $i3-wm.bar.statusline.color i3-wm.bar.statusline.color "#FFFFFF"
-set_from_resource $i3-wm.bar.separator.color i3-wm.bar.separator.color "#111111"
-
-set_from_resource $i3-wm.bar.workspace.focused.border.color i3-wm.bar.workspace.focused.border.color "#FFFFFF"
-set_from_resource $i3-wm.bar.workspace.focused.background.color i3-wm.bar.workspace.focused.background.color "#FFFFFF"
-set_from_resource $i3-wm.bar.workspace.focused.text.color i3-wm.bar.workspace.focused.text.color "#000000"
-
-set_from_resource $i3-wm.bar.workspace.active.border.color i3-wm.bar.workspace.active.border.color "#111111"
-set_from_resource $i3-wm.bar.workspace.active.background.color i3-wm.bar.workspace.active.background.color "#FFFFFF"
-set_from_resource $i3-wm.bar.workspace.active.text.color i3-wm.bar.workspace.active.text.color "#000000"
-
-set_from_resource $i3-wm.bar.workspace.inactive.border.color i3-wm.bar.workspace.inactive.border.color "#CCCCCC"
-set_from_resource $i3-wm.bar.workspace.inactive.background.color i3-wm.bar.workspace.inactive.background.color "#CCCCCC"
-set_from_resource $i3-wm.bar.workspace.inactive.text.color i3-wm.bar.workspace.inactive.text.color "#586e75"
-
-set_from_resource $i3-wm.bar.workspace.urgent.border.color i3-wm.bar.workspace.urgent.border.color "#dc322f"
-set_from_resource $i3-wm.bar.workspace.urgent.background.color i3-wm.bar.workspace.urgent.background.color "#dc322f"
-set_from_resource $i3-wm.bar.workspace.urgent.text.color i3-wm.bar.workspace.urgent.text.color "#fdf6e3"
-
-set_from_resource $i3-wm.bar.font i3-wm.bar.font "pango:Source Code Pro Medium 13, FontAwesome 13"
-
-# Configure the bar
+# The bar configuration
 bar {
-  font xft:URWGothic-Book 11
+  font xft:URWGothic-Book 8
   separator_symbol " "
-  status_command i3status #first, install i3status: sudo apt install i3status
+  status_command i3status
+  tray_output none
   strip_workspace_numbers yes
 
-  position bottom
-  colors {
-      background $i3-wm.bar.background.color
-      statusline $i3-wm.bar.statusline.color
-      separator  $i3-wm.bar.separator.color
+ colors {
+        background #000000
+        statusline #ffffff
+        separator #666666
 
-#                        BORDER  BACKGROUND TEXT
-      focused_workspace  $i3-wm.bar.workspace.focused.border.color      $i3-wm.bar.workspace.focused.background.color   $i3-wm.bar.workspace.focused.text.color
-      active_workspace   $i3-wm.bar.workspace.active.border.color       $i3-wm.bar.workspace.active.background.color    $i3-wm.bar.workspace.active.text.color
-      inactive_workspace $i3-wm.bar.workspace.inactive.border.color     $i3-wm.bar.workspace.inactive.background.color  $i3-wm.bar.workspace.inactive.text.color
-      urgent_workspace   $i3-wm.bar.workspace.urgent.border.color       $i3-wm.bar.workspace.urgent.background.color    $i3-wm.bar.workspace.urgent.text.color
-  }
+        focused_workspace  #4c7899 #285577 #ffffff
+        active_workspace   #333333 #5f676a #ffffff
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #2f343a #900000 #ffffff
+        binding_mode       #2f343a #900000 #ffffff
+    } 
 }
 
-# Run programs when i3 starts
+# The following exec calls run programs in the background when i3 starts.
 
-# exec --no-startup-id wal -i ~/Pictures/h.jpg
+# Start the installed regolith-compositor
+exec --no-startup-id /usr/share/regolith-compositor/init
 
-# Start the composite manager
-exec --no-startup-id compton -f --config $compton_config
+# Start Rofication for notifications
+#exec --no-startup-id /usr/share/rofication/rofication-daemon.py
 
-# Launch the shortcut Conky window on first login
+# Launch first time user experience script
 exec --no-startup-id /usr/bin/regolith-ftue
 
 # Hide the mouse pointer if unused for a duration
 exec --no-startup-id /usr/bin/unclutter -b
-
-# Refresh wallpaper on screen resolution change
-# exec --no-startup-id /usr/bin/xeventbind resolution /usr/bin/wallpaper-refresh
-
