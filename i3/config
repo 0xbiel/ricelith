@@ -106,6 +106,12 @@ bindsym $mod+Shift+t focus mode_toggle
 # toggle tabbed mode
 bindsym $mod+t layout toggle tabbed splith splitv
 
+bindsym $mod+u border none
+bindsym $mod+y border pixel 1
+bindsym $mod+n border normal
+
+bindsym $mod+Shift+l exec /home/biel/Projects/fun/stream/sconf.sh
+
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
